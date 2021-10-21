@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import CollapseWrapper from "../common/collapse";
 const UseRefExercise = () => {
+    const [width, setWidth] = useState(false);
+    const change = useRef(width);
+
+    useEffect(() => {
+        change.current = width;
+        console.log(change, "changeinUseEffect");
+    }, [width]);
+
     return (
         <CollapseWrapper title="Упражнение">
             <p className="mt-3">
@@ -14,13 +22,23 @@ const UseRefExercise = () => {
             <div
                 className="bg-primary d-flex flex-row justify-content-center align-items-center rounded"
                 style={{
-                    height: 40,
-                    width: 60,
+                    height: change.current ? 150 : 40,
+                    width: change.current ? 80 : 60,
                     color: "white"
                 }}
             >
-                <small>Блок</small>
+                <small>{change.current === true ? "Text" : "Блок"}</small>
             </div>
+            <button
+                className="btn btn-primary mt-3"
+                onClick={() => {
+                    console.log("clicked", width);
+                    setWidth((prev) => !prev);
+                    console.log("clickedEND", width);
+                }}
+            >
+                change size and text
+            </button>
         </CollapseWrapper>
     );
 };

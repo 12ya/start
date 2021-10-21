@@ -1,9 +1,15 @@
 import React from "react";
 import CollapseWrapper from "../common/collapse";
+import { withLogin } from "./withLogin";
+import { SimpleComponent } from "./simpleComponent";
+import { withPropStyles } from "./withPropStyles";
 
 const HocExercise = () => {
+    const WithLoginComponent = withLogin(SimpleComponent);
+    const StyledWithLoginComponent = withPropStyles(WithLoginComponent);
     return (
         <CollapseWrapper title="Упражнение">
+            <StyledWithLoginComponent />
             <p className="mt-3">
                 Вам необзодимо реализовать компонент{" "}
                 <code>SimpleComponent</code>, который:
